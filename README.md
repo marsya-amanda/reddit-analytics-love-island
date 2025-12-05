@@ -1,118 +1,93 @@
-# 📊 Love Island Games (Season 2) — Reddit Analytics Dashboard
+# Love Island Australia – Season 7  
+## Audience Performance & Sentiment Analysis (Reddit)
 
-> A one-day end-to-end data science project analyzing Reddit engagement and sentiment around *Love Island Games Season 2* using real-time community data.
+This repository contains a quantitative and qualitative audience performance analysis of *Love Island Australia Season 7* using Reddit engagement from **r/LoveIslandAus** as a proxy for live and VOD audience interest. The project was designed to mirror internal **TV ratings and title performance reporting** workflows.
 
-This project collects, processes, and visualizes Reddit discussion data to explore how audience sentiment and engagement evolve across episodes and major events. It demonstrates a complete **data pipeline**: from data ingestion to NLP analysis to interactive visualization.
-
----
-
-## 🎯 Project Goals
-
-- Build a complete **data ingestion → analysis → visualization pipeline in one day**
-- Quantify:
-  - audience engagement over time
-  - sentiment trends across episodes
-  - key discussion themes
-- Combine **quantitative metrics** (post volume, scores, comment counts)
-  with **qualitative analysis** (sentiment, keywords, topics)
+**Prepared by:** Marsya Amanda  
+**Season Covered:** Episodes 1–20 (27 Oct 2025 – 27 Nov 2025)  
+**Tools:** Python, pandas, matplotlib  
 
 ---
 
-## 🧪 Data Source
+## Project Overview
 
-- **Platform:** Reddit  
-- **Communities:** Relevant Love Island subreddits  
-- **Data Collected:**
-  - post titles and bodies  
-  - comment text  
-  - timestamps  
-  - upvotes / scores  
-  - comment counts  
+- **Threads analysed:** 74  
+- **Comments analysed:** 12,438  
+- **Episodes covered:** 20  
+- **Peak engagement:** Episode 20 (2,251 total interactions)  
+- **Primary drivers of engagement:** Recouplings, eliminations, and production-driven conflicts  
 
-Data was collected using the Reddit API and stored locally for reproducibility.
-
----
-
-## 🛠 Tech Stack
-
-- **Language:** Python  
-- **Data Collection:** PRAW (Reddit API)  
-- **Data Processing:** pandas, numpy  
-- **NLP & Text Analysis:** nltk / vader / scikit-learn  
-- **Visualization:** matplotlib, seaborn / plotly  
-- **Dashboard:** Streamlit
+The analysis integrates:
+- Episode-level engagement tracking
+- Cumulative season engagement
+- Sentiment homogeneity as a measure of audience consensus vs polarisation
+- Qualitative interpretation of discussion dynamics
 
 ---
 
-## 🔁 Pipeline Overview
+## Data Source
 
-Reddit API -> Raw JSON Data -> Data Cleaning & Normalization -> Feature Engineering -> Sentiment -> Analysis & Keyword Extraction -> Time-Series Aggregation -> Interactive Dashboard
-
----
-
-## 📈 Key Analyses Performed
-
-- **Engagement Over Time**
-  - Daily post and comment volume
-  - Spike detection around episode drops
-
-- **Sentiment Trends**
-  - Compound sentiment by day
-  - Rolling sentiment averages
-  - Episode-to-episode mood shifts
-
-- **Discussion Themes**
-  - Keyword frequency analysis
-  - Common phrases and topics
-  - High-engagement posts vs. low-engagement posts
-
-- **Performance Indicators**
-  - Posts per episode
-  - Average sentiment vs upvote score
+- Subreddit: **r/LoveIslandAus**
+- Collection method: Web scraping with BeautifulSoup
+- Filters:
+  - Episode identifiers (“Episode”, “Ep”, “E0X”)
+  - Season identifiers (“Season 7”, “S7”)
+  - Posts from **27 Oct 2025 onward**
+- Posts sorted by newest
+- All data is publicly available Reddit content
 
 ---
 
-## 📊 Dashboard Features
+## Key Metrics
 
-- Time-series plots of:
-  - submission volume
-  - average sentiment
-- Distribution of post scores
-- Top keywords by day / week
-- Filters by:
-  - subreddit
-  - date range
-  - sentiment polarity
-
-> Screenshots or demo GIFs can be added here.
+- **Engagement Volume:** Posts + comments per episode  
+- **Attention Intensity:** Total upvotes per episode  
+- **Cumulative Engagement:** Running total across episodes  
+- **Sentiment Homogeneity:** Standard deviation of sentiment across discussion threads  
 
 ---
 
-## 🧠 Technical Challenges & Solutions
+## Key Outputs
 
-### 1. Noisy Social Media Text
-**Challenge:** Reddit text contains slang, sarcasm, emojis, and abbreviations.  
-**Solution:** Implemented text normalization (lowercasing, punctuation removal, stopword filtering) before sentiment computation.
-
-### 2. Biased Sentiment Readings
-**Challenge:** Single-post sentiment is often unstable.  
-**Solution:** Aggregated sentiment using rolling averages and daily means to smooth volatility.
-
-### 3. Data Collection Rate Limits
-**Challenge:** API rate limits restrict large-scale scraping.  
-**Solution:** Batched requests and cached intermediate results locally for fast re-analysis.
-
-### 4. Signal vs. Hype
-**Challenge:** Engagement spikes do not always reflect sentiment shifts.  
-**Solution:** Visualized sentiment and engagement side-by-side to detect divergence patterns.
+- Episode-level engagement and sentiment metrics  
+- Season-wide cumulative engagement trends  
+- Sentiment homogeneity by episode  
+- Final performance report (`report.pdf`)
+- Reproducible Python analysis notebook
 
 ---
 
-## 🚀 How the Project Was Built (1-Day Sprint)
+## Repository Structure
 
-- **Hour 1–2:** API setup, subreddit discovery, raw data extraction  
-- **Hour 3–4:** Data cleaning, schema design, CSV persistence  
-- **Hour 5–6:** Sentiment analysis + keyword extraction  
-- **Hour 7–8:** Aggregation + time-series feature engineering  
-- **Hour 9–10:** Dashboard construction  
-- **Hour 11–12:** Refinement, visualization cleanup, documentation
+```
+data/ # Raw and cleaned Reddit data
+plot/ # Generated figures for the report
+analysis.ipynb
+report.pdf
+requirements.txt
+README.md
+```
+
+---
+
+## Limitations
+
+- Reddit users represent a highly engaged but non-representative subset of total viewers  
+- Engagement is used as a **proxy** for audience interest, not official ratings or streaming data  
+- Sentiment was inferred via qualitative analysis and engagement-based proxies  
+
+---
+
+## Reproducibility
+
+1. Install dependencies:
+  ```bash
+  pip install -r requirements.txt
+  ```
+2. Run `analysis.ipynb` to reproduce all figures and tables.
+
+--
+
+## Use Case
+
+This project demonstrates a title-level audience performance reporting pipeline aligned with broadcast and streaming analytics roles, including engagement tracking, sentiment analysis, and editorial performance interpretation.
